@@ -25,6 +25,78 @@
       - 단위 테스트는 기능에 대한 불확실성을 감소시킬 수 있다.
       - 단위 테스트는 시스템에 대한 실제 문서를 제공할 수 있다.
   
+- build
+  - 빌더 패턴(Builder pattern) 이란 복합 객체의 생성 과정과 표현 방법을 분리하여 동일한 생성 절차에서 서로 다른 표현 결과를 만들 수 있게 하는 패턴이다
+  - 많은 파라미터를 갖고 있는 생성자를 사용할 경우 생성자의 매개변수 수를 통제하기 어렵다.
+    - 이해하기 어려워 진다.
+  - 생성자 오염을 피하면서 객체의 다양한 특징을 만들 수 있습니다. 객체의 여러 특징이 있을 수 있을 때 유용합니다. 또는 객체 생성과 관련된 많은 단계가 있는 경우.
+  - 빌더 객체를 통해 구체적인 객체를 생성한다.
+  
+```java
+//빌더 예시
+package builder;
+
+public class user {
+  private String name;
+  private int age;
+
+
+  private int like_num;
+
+  public String getName() {
+    return name;
+  }
+
+  public int getLike_num() {
+    return like_num;
+  }
+
+
+  public int getAge() {
+    return age;
+  }
+
+
+  private user(userBuilder builder){
+    this.name = builder.name;
+    this.age = builder.age;
+
+  }
+
+  //build class
+  public static class userBuilder{
+    private String name;
+    private int age;
+    private int like_num;
+
+    public userBuilder setLike_num(int like_num){
+      return this;
+    }
+
+    public userBuilder(String name,int age){
+      this.name=name;
+      this.age= age;
+    }
+
+
+    public user build(){
+      return new user(this);
+    }
+
+  }
+
+  public static void main(String args[]){
+
+    user test = new user.userBuilder("test1",15)
+            .build();
+
+    System.out.println("test.name " + test.getName());
+    System.out.println("test.getAge " + test.getAge());
+    System.out.println("test.getLike_num " + test.getLike_num());
+  }
+}
+
+```
 
 
   ## 어노테이션
@@ -38,6 +110,9 @@
   
 - @SpringBootTest
   - H2데이터베이스를 자동으로 실행해 준다.
+
+- @Builder
+  - build
 
 - ### Test어노테이션
   - @WebMvcTest 

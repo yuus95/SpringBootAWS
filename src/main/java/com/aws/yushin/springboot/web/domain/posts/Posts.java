@@ -1,15 +1,18 @@
 package com.aws.yushin.springboot.web.domain.posts;
 
+import com.aws.yushin.springboot.web.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 
+@EnableJpaAuditing
 @Getter
 @NoArgsConstructor
 @Entity // JPA어노테이션 그외는 롬북 어노테이션
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
