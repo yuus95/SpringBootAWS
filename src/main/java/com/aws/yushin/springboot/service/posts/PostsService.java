@@ -20,6 +20,10 @@ import java.util.stream.Collectors;
 public class PostsService {
     private final PostsRepository postsRepository;
 
+
+    /**
+     * toEntity() : Dto --> Entity
+     */
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
         return postsRepository.save(requestDto.toEntity()).getId();
@@ -37,7 +41,7 @@ public class PostsService {
     @Transactional(readOnly = true)
     public PostsResponseDto findById(Long id){
         Posts entity = postsRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id" + id));
+                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id " + id));
         return new PostsResponseDto(entity);
     }
 

@@ -11,4 +11,6 @@ public interface PostsRepository extends JpaRepository<Posts,Long> {
 
     @Query("Select p FROM Posts p ORDER BY p.id desc")
     List<Posts> findAllDesc();
+
 }
+

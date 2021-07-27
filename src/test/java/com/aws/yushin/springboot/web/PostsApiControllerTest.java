@@ -28,8 +28,14 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 
 
+
+/**
+ * webEnviroment 속성 
+ * Mock : 내장 톰켓 구동x
+ * RANDOM_PORT_DEFINED_PORT :내장 톰켓 사용
+ */ 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 
 class PostsApiControllerTest {
 
     @LocalServerPort
@@ -100,7 +106,6 @@ class PostsApiControllerTest {
 
         HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
-
         //when
         ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
 
@@ -130,7 +135,7 @@ class PostsApiControllerTest {
         String url = "http://localhost:"+port+"/api/v1/posts/"+id;
 
         Optional<Posts> byId = postsRepository.findById(id);
-        PostsResponseDto postsResponseDto = new PostsResponseDto(byId.get());
+        PostsResponseDto postsResponseDto = new PostsResponseDto(byId.orElse(null));
         HttpEntity<PostsResponseDto> requestEntity = new HttpEntity<>(postsResponseDto);
 
         //when

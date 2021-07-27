@@ -24,7 +24,7 @@ class PostsRepositoryTest {
         postsRepository.deleteAll();
     }
 
-    @Test
+        @Test
         public void 게시글저장_불러오기() throws Exception{
             //given
             String title= "테스트 게시글";
@@ -36,8 +36,10 @@ class PostsRepositoryTest {
             .author("yushin")
             .build());
 
+            System.out.println("============= start");
             //when
             List<Posts> postsList = postsRepository.findAll();
+            System.out.println("============= end");
 
             //then
             Posts posts = postsList.get(0);

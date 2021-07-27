@@ -19,6 +19,9 @@ public class PostsSaveRequestDto {
         this.author=author;
     }
 
+    /**
+     * DTO를 엔티티로 변환해서 repo.save로전달
+     */
     public Posts toEntity(){
         return Posts.builder()
                 .title(title)

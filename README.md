@@ -117,15 +117,14 @@ public class user {
 - ### Test어노테이션
   - @WebMvcTest 
     - JPA기능이 작동하지 않는다
-  - @SpringBootTest,TestRestTemplate
-  
+  - @SpringBootTest
+    - @WebMvcTest의 경우  JPA 기능이 작동하지 않기 떄문에  @SpringBootTest와 TestRestRemplate를 사용하기
   - @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
     -  사용하지 않는 랜덤 포트 사용
   - @DataJpaTest : JPA 관련된 컴포넌트만 로드된다.    
   - TestRestTemplate 
     - httpsAPI와 통신이 잘되고, 통합테스트에 매우 유용하다
     - 
-    
 
 
 ## Spring Data JPA
@@ -180,3 +179,5 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
   - @autowired대신 생성자 주입방식 쓰기! (@RequiredArgsContructor사용해서 빈객체 얻기)
   - 롬북을 사용하면 생서자 코드를 계속해서 수정하는 번거로움을 해결할 수 있다.
   
+- 스프링 데이터 JPA가 제공하는 Repository의 모든 메소드는 @Transactional이 적용되어 있다.
+  - test코드 사용할 떄 Transaional안넣어도됨
