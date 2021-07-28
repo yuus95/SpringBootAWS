@@ -106,6 +106,11 @@ class PostsApiControllerTest {
 
         HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
+
+        /**
+         *public <T> ResponseEntity<T> exchange(String url, HttpMethod method, HttpEntity <T>  requestEntity,
+         * 			Class<T> responseType, Object... urlVariables
+         */
         //when
         ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
 
