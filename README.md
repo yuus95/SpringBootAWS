@@ -124,7 +124,7 @@ public class user {
   - @DataJpaTest : JPA 관련된 컴포넌트만 로드된다.    
   - TestRestTemplate 
     - httpsAPI와 통신이 잘되고, 통합테스트에 매우 유용하다
-    - 
+  
 
 
 ## Spring Data JPA
@@ -177,7 +177,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
   
 - Bean객체 주입받기 
   - @autowired대신 생성자 주입방식 쓰기! (@RequiredArgsContructor사용해서 빈객체 얻기)
-  - 롬북을 사용하면 생서자 코드를 계속해서 수정하는 번거로움을 해결할 수 있다.
+  - 롬북을 사용하면 생성자 코드를 계속해서 수정하는 번거로움을 해결할 수 있다.
   
 - 스프링 데이터 JPA가 제공하는 Repository의 모든 메소드는 @Transactional이 적용되어 있다.
   - test코드 사용할 떄 Transaional안넣어도됨
+  
+- HttpEntity
+  -  HttpEntity<T>HTTP 요청 또는 응답의 헤더와 본문을 캡슐화하는 도우미 개체입니다. 핸들러 메소드 매개변수로 사용할 수 있습니다.
