@@ -1,4 +1,4 @@
-package com.aws.yushin.springboot.web;
+package com.aws.yushin.springboot.web.controller;
 
 
 import com.aws.yushin.springboot.web.dto.HelloResponseDto;
