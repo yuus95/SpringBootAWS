@@ -184,3 +184,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
   
 - HttpEntity
   -  HttpEntity<T>HTTP 요청 또는 응답의 헤더와 본문을 캡슐화하는 도우미 개체입니다. 핸들러 메소드 매개변수로 사용할 수 있습니다.
+ 
+
+- CSRF란?
+  - 사이트 간 요청 위조
+  - csrf토큰
+    - 임의의 난수를 생성하고 세션에 저장한다 사용자의 매 요청마다 해당 난수 값을 포함 시켜서 전송시킨다.
+    - 이후 백엔드에서는 요청을 ㅂ다을 때 마다 세션에 저장된 토큰값과 요청 파라미터에 전달도니 토큰 값이 같은지 검사한다.
+    - CSRF토큰 거절 자바스크립트를 사용하기도 어렵다.
+    

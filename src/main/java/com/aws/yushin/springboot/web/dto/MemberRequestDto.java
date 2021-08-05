@@ -7,12 +7,18 @@ import lombok.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberRequestDto {
 
+    @Max(20)
     private String email;
+    @NotBlank
     private String password;
 
     public Member toMember(PasswordEncoder passwordEncoder) {

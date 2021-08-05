@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+/**
+ * filter는 Request 요청마다 한번씩 호출하는 OnecePerRequestFilter을 상속한다
+ *
+ */
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 

@@ -12,7 +12,9 @@ import java.io.IOException;
 
 
 
+
 /**
+ * https://sas-study.tistory.com/362?category=784778 참고하기
  * 유효한 자격증명을 제공하지 않고 접근하려할 떄 401 Unauthorized 에러를 리턴할 클래스
  */
 @Component

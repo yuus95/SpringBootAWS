@@ -17,6 +17,7 @@ import java.util.Collections;
 
 /**
  * username을 가져와 비밀번호 비교
+ *
  */
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
+
+    /**
+     * 인증된 결과를 가지고 UserDetails 인터페이스를 구현하는 인증대상객체를 리턴
+     */
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

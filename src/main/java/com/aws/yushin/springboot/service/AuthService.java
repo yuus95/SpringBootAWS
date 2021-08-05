@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final이 걸려있는 모든생성자를 만들어준다 DI를 할 떄 사용
 public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final MemberRepository memberRepository;
@@ -26,7 +26,7 @@ public class AuthService {
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    @Transactional
+    @Transactional // write (insert,update,delete)할 때 사용
     public MemberResponseDto signup(MemberRequestDto memberRequestDto) {
         if (memberRepository.existsByEmail(memberRequestDto.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");

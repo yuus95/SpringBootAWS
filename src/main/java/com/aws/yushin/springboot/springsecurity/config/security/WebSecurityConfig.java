@@ -23,7 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  *
  */
 @RequiredArgsConstructor
-@EnableWebSecurity
+@EnableWebSecurity // 스프링 시큐리티를 활성화하는 어노테이션
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -37,6 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+//    이렇게 사용해도됨.
+//    @Bean
+//    public BCryptPasswordEncoder encoder(){
+//        return new BCryptPasswordEncoder();
+//    }
 
     // h2 database 테스트가 원활하도록 관련 API 들은 전부 무시
     @Override
@@ -45,10 +50,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/h2-console/**", "/favicon.ico");
     }
 
+    /**
+     * super()을 삭제하면 기존 시큐리티가 가지고 있는 기능이 다 비활성화
+     *
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // CSRF 설정 Disable
+        // 로긴form은 csrf토큰을 활성화 시킨다.
+        // csrf토큰을 비활성화 시키면 postman으로 데이터를 넣든 그냥 데이터를 넣든 상관없다.
         http.csrf().disable()
+
+                /**AuthenticationEntryPoint
+                 * 인증과정에서 실패하거나 인증헤더를 보내지 않게 되는 경우 401응답값을 보내도록 처리해주는 인터페이스 -
+                 */
 
                 // exception handling 할 때 우리가 만든 클래스를 추가
                 .exceptionHandling()
@@ -69,14 +84,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
                 // 로그인, 회원가입 API 는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
                 .and()
+                // authorizeRequest() 인증절차에 대한 설정을 진행
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .antMatchers("/auth/**").permitAll()
+                // antMatchers()  : 특정 URL에 대해서 어떻게 인증처리를 할지 결정
+                .antMatchers("/**","/auth/**").permitAll()
+                // anyRequest: 모든요청에 대하여
+                // authenticated: 스프링 시큐리티 컨텍스트 내에서 인증이 완료되야 api를 사용할 수 있다.
                 .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
 
                 // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));
+
+                /**
+                 * jwt 없이 필터 적용
+                 */
+                // .addFilterBefore(securityAuthentic)
+
     }
 }
 
